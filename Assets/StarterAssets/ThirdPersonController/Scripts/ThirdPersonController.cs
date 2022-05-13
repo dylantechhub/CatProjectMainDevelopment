@@ -26,6 +26,9 @@ namespace StarterAssets
 		public float SpeedChangeRate = 10.0f;
 
 		[Space(10)]
+		private bool canclimb = false;
+		[Tooltip("Players climb raycast system.")]
+		public LayerMask hitlayers;
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -68,7 +71,8 @@ namespace StarterAssets
 		private float _animationBlend;
 		private float _targetRotation = 0.0f;
 		private float _rotationVelocity;
-		private float _verticalVelocity;
+		public float _verticalVelocity;
+		
 		private float _terminalVelocity = 53.0f;
 
 		// timeout deltatime
@@ -116,10 +120,15 @@ namespace StarterAssets
 		private void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
-			
+			if (canclimb == false)
+			{
+				Gravity = -15;
+
+			}
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			Climbcast();
 		}
 
 		private void LateUpdate()
@@ -166,6 +175,28 @@ namespace StarterAssets
 			CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw, 0.0f);
 		}
 
+		private void Climbcast()
+        {
+			RaycastHit hit;
+
+			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, hitlayers))
+			{
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+				Debug.Log("Did Hit");
+				canclimb = true;
+				Gravity = 0;
+				//player.transform.rotation = Quaternion.Inverse(other.transform.rotation);
+
+			}
+			else
+			{
+				canclimb = false;
+				Gravity = -15f;
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+				Debug.Log("Did not Hit");
+			}
+		}
+
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
@@ -204,7 +235,7 @@ namespace StarterAssets
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
-			if (_input.move != Vector2.zero)
+			if (_input.move != Vector2.zero && !canclimb)
 			{
 				_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
 				float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
@@ -217,8 +248,31 @@ namespace StarterAssets
 			Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
 			// move the player
-			_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
+			if (!canclimb)
+			{
+				_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			}
+			else if (canclimb)
+			{
+				if (Keyboard.current.wKey.isPressed)
+				{
+					gameObject.transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+				}
+				if (Keyboard.current.sKey.isPressed)
+				{
+					gameObject.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+				}
+				if (Keyboard.current.aKey.isPressed)
+				{ 
+					gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
+					
+					
+				}
+				if (Keyboard.current.dKey.isPressed)
+				{
+					gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
+				}
+			}
 			// update animator if using character
 			if (_hasAnimator)
 			{
@@ -247,16 +301,32 @@ namespace StarterAssets
 					_verticalVelocity = -2f;
 				}
 
-				// Jump
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-					// update animator if using character
-					if (_hasAnimator)
+                
+				
+
+				// Jump
+				if (_input.jump)
+				{
+					if (!canclimb && _jumpTimeoutDelta <= 0.0f)
 					{
-						_animator.SetBool(_animIDJump, true);
+
+
+						// the square root of H * -2 * G = how much velocity needed to reach desired height
+						_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+						// update animator if using character
+						if (_hasAnimator)
+						{
+							_animator.SetBool(_animIDJump, true);
+						}
+					}
+                    if (canclimb)
+                    {
+						_verticalVelocity = Mathf.Sqrt(5);
+						Gravity = 0;
+						//gameObject.transform.Translate(new Vector3(0, 10 * 5f * Time.deltaTime, 0));
+						Debug.Log("Climb");
 					}
 				}
 
@@ -294,6 +364,7 @@ namespace StarterAssets
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
+			//if(_ClimbVeclocity)
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
