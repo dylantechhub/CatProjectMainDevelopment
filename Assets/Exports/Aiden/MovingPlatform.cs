@@ -15,17 +15,23 @@ public class MovingPlatform : MonoBehaviour
     private float posY;
     private float posZ;
 
-    [SerializeField]
-    private bool forward;
-    [SerializeField]
-    private bool reverse;
+    private static bool forward;
+
+    private static bool reverse;
 
     private bool UsingTrigger;
 
+    private bool GlobalDebugMode;
+
     [Space(10)]
-    [Header("IMPORTANT:\nThis defines the platforms ID!\nThe platforms ID is what defines its forward, and reverse point.\n to set these points, use the following tags:\n" +
-        "(PLATFORM ID HERE)_FORWARDS\n(PLATFORM ID HERE)_BACKWARDS")]
-    public string MovingPlatformID;
+    [SerializeField]
+    public static string MovingPlatformID;
+    public void SetMPID(string ID) {
+        if (ID != "")
+            MovingPlatformID = ID;
+            else
+            Debug.LogError($"[MPC] ERROR! Moving platform named {this.gameObject.name} does not have a set ID!");
+    }
 
     private List<string> METHODS = new List<string>();
 
@@ -33,15 +39,20 @@ public class MovingPlatform : MonoBehaviour
     private bool Direction;
 
     //the PlatformController calls this function to enable the platform.
-    public void EnablePlatform(float d, float gpmsPC, string METHOD_X, string METHOD_Y, string METHOD_Z, bool DIRECTION, bool usingTrigger)
+    public void EnablePlatform(float d, float gpmsPC, string METHOD_X, string METHOD_Y, string METHOD_Z, bool DIRECTION, bool usingTrigger, bool GDM)
     {
+        GlobalDebugMode = GDM;
         UsingTrigger = usingTrigger;
         Direction = DIRECTION;
             METHODS.Add(METHOD_X);
             METHODS.Add(METHOD_Y);
             METHODS.Add(METHOD_Z);
 
-        print($"[MPC]: Platform {MovingPlatformID} Enabled/Updated! Using Methods: "+METHOD_Z+ METHOD_Y+ METHOD_X+$" TriggerMode?: "+usingTrigger);
+        if (GlobalDebugMode) {
+            print("[MPC]: Global-Debug mode enabled!");
+            print($"[MPC]: Platform {MovingPlatformID} Enabled/Updated! Using Methods: "+METHOD_Z+ METHOD_Y+ METHOD_X+$" TriggerMode?: "+usingTrigger); 
+        }
+        
         if(METHODS.Contains("X"))
         {
             X = true;
@@ -68,7 +79,9 @@ public class MovingPlatform : MonoBehaviour
 
     private void Update()
     {
-        //Alingers, keep the platform on path.
+
+
+        //Alingners, keep the platform on path.
         if (X && !Y && !Z)
         {
             transform.position = new Vector3(transform.position.x, posY, posZ);
@@ -86,6 +99,7 @@ public class MovingPlatform : MonoBehaviour
             transform.position = new Vector3(posX, transform.position.y, transform.position.z);
         } else if (X && Y && Z)
         {
+            if (GlobalDebugMode)
             Debug.LogAssertion($"[MPC]: All Axis' For Platform: {MovingPlatformID} Have been enabled!\nPlease note that this could cause path issues.");
         }
         
@@ -186,21 +200,25 @@ public class MovingPlatform : MonoBehaviour
         if (collision.gameObject.tag == MovingPlatformID+"_REVERSE" && UsingTrigger)
         {
             stop = true;
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Reverse");
             StartCoroutine(Reverse());
         }
         else if (collision.gameObject.tag == MovingPlatformID + "_FORWARDS" && UsingTrigger)
         {
             stop = true;
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Forwards");
             StartCoroutine(Forwards());
         }
         else if (!UsingTrigger)
         {
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Hit Trigger in Collider mode, Disregarding");
         }
         else
         {
+            if (GlobalDebugMode)
             Debug.LogWarning($"[MPC]: Warning! Platform ID: {MovingPlatformID} Hit GameObject Name {collision.gameObject.name} That is NOT a Platform Director!");
         }
 
@@ -211,20 +229,24 @@ public class MovingPlatform : MonoBehaviour
         if (collision.gameObject.tag == MovingPlatformID + "_REVERSE" && !UsingTrigger)
         {
             stop = true;
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID}: Hit Reverse");
             StartCoroutine(Reverse());
         }
         else if (collision.gameObject.tag == MovingPlatformID + "_FORWARDS" && !UsingTrigger)
         {
             stop = true;
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Hit Forwards");
             StartCoroutine(Forwards());
         } else if (UsingTrigger)
         {
+            if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Hit Collider in Trigger mode, Disregarding");
         }
         else
         {
+            if (GlobalDebugMode)
             Debug.LogWarning($"[MPC]: Warning! Platform ID: {MovingPlatformID} Hit GameObject name {collision.gameObject.name} This is NOT a Platform Director!");
         }
 
@@ -237,6 +259,7 @@ public class MovingPlatform : MonoBehaviour
         forward = true;
         reverse = false;
         stop = false;
+        if (GlobalDebugMode)
         print("[MPC]: Forwards For ID: " + MovingPlatformID+ " (waited: " +Delay+"s)");
     }
     private IEnumerator Reverse()
@@ -247,6 +270,7 @@ public class MovingPlatform : MonoBehaviour
         reverse = true;
         stop = false;
         gameObject.transform.Translate(Vector3.back * gpms);
+        if (GlobalDebugMode)
         print("[MPC]: Reverse For ID: " + MovingPlatformID + " (waited: " + Delay + "s)");
     }
 }
