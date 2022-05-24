@@ -32,7 +32,10 @@ public class SpawnPoint : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        timerUI.text = timer.ToString("n2");
+        if( timerUI != null)
+        {
+            timerUI.text = timer.ToString("n2");
+        }
 
         if(Keyboard.current.escapeKey.IsPressed())
         {
