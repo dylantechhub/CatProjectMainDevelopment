@@ -712,7 +712,7 @@ PrefabInstance:
     - target: {fileID: 90986029260531483, guid: b8a70e037d810914595bed87e784f436, type: 3}
       propertyPath: cat
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1568411384}
     - target: {fileID: 90986029260531483, guid: b8a70e037d810914595bed87e784f436, type: 3}
       propertyPath: timerUI
       value: 
@@ -720,7 +720,7 @@ PrefabInstance:
     - target: {fileID: 90986029260531483, guid: b8a70e037d810914595bed87e784f436, type: 3}
       propertyPath: controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1568411385}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a70e037d810914595bed87e784f436, type: 3}
 --- !u!114 &1483234450 stripped
@@ -776,6 +776,10 @@ PrefabInstance:
     - target: {fileID: 4730252787481022255, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592719339695195911, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.67
       objectReference: {fileID: 0}
     - target: {fileID: 5592719339695195911, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -835,6 +839,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
+--- !u!4 &1568411384 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 295249935108811977, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
+  m_PrefabInstance: {fileID: 1568411383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1568411385 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1104262535725348473, guid: a235a191c29ad6c4fa1d075394e87ca7, type: 3}
+  m_PrefabInstance: {fileID: 1568411383}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1577126517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb1250d4365043040ba00bf97fd4db83, type: 3}
