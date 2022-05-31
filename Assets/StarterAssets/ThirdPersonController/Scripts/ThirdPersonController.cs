@@ -67,7 +67,8 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
-		private float _speed;
+		[HideInInspector]
+		public float _speed;
 		private float _animationBlend;
 		private float _targetRotation = 0.0f;
 		private float _rotationVelocity;
@@ -80,15 +81,22 @@ namespace StarterAssets
 		private float _fallTimeoutDelta;
 
 		// animation IDs
-		private int _animIDSpeed;
-		private int _animIDGrounded;
-		private int _animIDJump;
-		private int _animIDFreeFall;
-		private int _animIDMotionSpeed;
+		[HideInInspector]
+		public int _animIDSpeed;
+		[HideInInspector]
+		public int _animIDGrounded;
+		[HideInInspector]
+		public int _animIDJump;
+		[HideInInspector]
+		public int _animIDFreeFall;
+		[HideInInspector]
+		public int _animIDMotionSpeed;
 
-		private Animator _animator;
+		[HideInInspector]
+		public Animator _animator;
 		private CharacterController _controller;
-		private StarterAssetsInputs _input;
+		[HideInInspector]
+		public StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
@@ -193,7 +201,6 @@ namespace StarterAssets
 				canclimb = false;
 				Gravity = -15f;
 				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-				Debug.Log("Did not Hit");
 			}
 		}
 
