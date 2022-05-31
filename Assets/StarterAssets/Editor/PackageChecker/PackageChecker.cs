@@ -196,11 +196,6 @@ namespace StarterAssets
             }
         }
 
-        internal static void RemovePackageCheckerScriptingDefine()
-        {
-            throw new NotImplementedException();
-        }
-
         private static AddRequest InstallSelectedPackage(string packageName, string packageVersion)
         {
             if (packageVersion != null)
