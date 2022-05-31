@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(" THing hit");
+        Debug.Log("Thing hit");
         Debug.Log(other.gameObject.name);
         if (other.gameObject.CompareTag("Player"))
         {

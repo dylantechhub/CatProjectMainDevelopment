@@ -16,7 +16,7 @@ public class TriggerCollisionListener : MonoBehaviour {
     [Header("Debug Settings")]
     public bool DEBUG_MODE = false;
 
-	public void OnTriggerEnter3D(Collider col){
+	public void OnTriggerEnter(Collider col){
         // get colliding object reference
         // If we are using the tag to filter collisions
         if( useTagForCollision){
