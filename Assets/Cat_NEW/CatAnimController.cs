@@ -22,6 +22,19 @@ public class CatAnimController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Main();
+    }
+
+
+      void Idle()
+    {
+        Cat.SetBool("idle", true);
+        //if idle animation is used, blend to it from here
+        
+    }
+
+    void Main()
+    {
         //update animator with paramters that would be used by the old animator, makes life much more easier
 
         //sprinting
@@ -29,31 +42,34 @@ public class CatAnimController : MonoBehaviour
         {
             sprinting = true;
             //double the movement speed, therefore sprint
-        Cat.SetFloat("motionSpeed", 0.6f);
+            Cat.SetFloat("motionSpeed", 0.6f);
             Cat.SetBool("running", true);
             Cat.SetBool("walking", false);
+            Cat.SetBool("idle", false);
         }
         else
         {
             sprinting = false;
+            //set movment speed to 0, therefore stopping the animation
+            Cat.SetFloat("motionSpeed", 0);
             Cat.SetBool("running", false);
             Cat.SetBool("walking", false);
-            Cat.SetFloat("motionSpeed", 0);
             Idle();
         }
 
 
-        //possible useful vars for later. default value for now.
         Cat.speed = TPC._speed;
-        
+
 
         //walking
-        if (TPC._input.move != Vector2.zero  && !sprinting)
+        if (TPC._input.move != Vector2.zero && !sprinting)
         {
             Cat.SetFloat("motionSpeed", 0.5f);
             Cat.SetBool("running", false);
             Cat.SetBool("walking", true);
-        } else if (!sprinting)
+            Cat.SetBool("idle", false);
+        }
+        else if (!sprinting)
         {
             Cat.SetFloat("motionSpeed", 0);
             Cat.SetBool("walking", false);
@@ -61,14 +77,10 @@ public class CatAnimController : MonoBehaviour
             Idle();
         }
 
+        if (Cat.GetBool("idle"))
+        {
+            Cat.GetLayerIndex("Idle");
+        }
 
-    }
-
-
-      void Idle()
-    {
-        //if idle animation is used, blend to it from here
-        //for now, assume there is no idle animation, and blend the model to its static position
-        
     }
 }
