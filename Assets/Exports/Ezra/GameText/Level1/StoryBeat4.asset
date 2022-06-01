@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPicture: {fileID: 0}
   title: Firely
-  textContent: Great job kid, I am gonna go take a rest for a bit.
+  textContent: Great job making it this far kid, I am gonna go take a rest for a
+    bit.
