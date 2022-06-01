@@ -59,7 +59,7 @@ public class CatAnimController : MonoBehaviour
 
 
         Cat.speed = TPC._speed;
-
+        Cat.SetFloat("speed", TPC._speed);
 
         //walking
         if (TPC._input.move != Vector2.zero && !sprinting)
@@ -79,7 +79,7 @@ public class CatAnimController : MonoBehaviour
 
         if (Cat.GetBool("idle"))
         {
-            Cat.GetLayerIndex("Idle");
+           
         }
 
     }
