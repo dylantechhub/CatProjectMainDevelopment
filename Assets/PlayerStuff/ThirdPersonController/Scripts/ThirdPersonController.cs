@@ -265,7 +265,7 @@ namespace StarterAssets
 				{
 					gameObject.transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
 				}
-				if (Keyboard.current.sKey.isPressed)
+				if (Keyboard.current.sKey.isPressed && !Grounded)
 				{
 					gameObject.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
 				}
@@ -315,10 +315,8 @@ namespace StarterAssets
 				// Jump
 				if (_input.jump)
 				{
-					if (!canclimb && _jumpTimeoutDelta <= 0.0f)
+					if ( _jumpTimeoutDelta <= 0.0f)
 					{
-
-
 						// the square root of H * -2 * G = how much velocity needed to reach desired height
 						_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
@@ -327,13 +325,6 @@ namespace StarterAssets
 						{
 							_animator.SetBool(_animIDJump, true);
 						}
-					}
-                    if (canclimb)
-                    {
-						_verticalVelocity = Mathf.Sqrt(5);
-						Gravity = 0;
-						//gameObject.transform.Translate(new Vector3(0, 10 * 5f * Time.deltaTime, 0));
-						Debug.Log("Climb");
 					}
 				}
 
