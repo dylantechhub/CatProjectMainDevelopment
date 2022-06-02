@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SpawnPoint : MonoBehaviour
 {
-    public Transform cat;
+    public GameObject cat;
     public CharacterController controller;
 
     public float timer = 0;
@@ -24,9 +24,9 @@ public class SpawnPoint : MonoBehaviour
         {
             Debug.Log("Resetting Level");
             
-            controller.enabled = false;
-            cat.position = this.transform.position;
-            controller.enabled = true;
+            //controller.enabled = false;
+            cat.transform.position = gameObject.transform.position;
+           // controller.enabled = true;
 
             StartTimer();
         }
