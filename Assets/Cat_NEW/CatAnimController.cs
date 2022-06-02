@@ -40,6 +40,7 @@ public class CatAnimController : MonoBehaviour
         //sprinting
         if (TPC._input.sprint)
         {
+            Cat.speed = 3f;
             sprinting = true;
             //double the movement speed, therefore sprint
             Cat.SetFloat("motionSpeed", 0.6f);
@@ -49,6 +50,7 @@ public class CatAnimController : MonoBehaviour
         }
         else
         {
+            Cat.speed = 1;
             sprinting = false;
             //set movment speed to 0, therefore stopping the animation
             Cat.SetFloat("motionSpeed", 0);
@@ -57,8 +59,6 @@ public class CatAnimController : MonoBehaviour
             Idle();
         }
 
-
-        Cat.speed = TPC._speed;
         Cat.SetFloat("speed", TPC._speed);
 
         //walking
