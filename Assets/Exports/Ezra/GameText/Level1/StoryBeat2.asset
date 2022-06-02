@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPicture: {fileID: 0}
   title: Firely
-  textContent: Good job, Now jump and get to the other side!
+  textContent: Good job, Now walk carefully through this tightrope down below or
+    else you will fall
