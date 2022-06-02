@@ -95,7 +95,7 @@ namespace StarterAssets
 		[HideInInspector]
 		public Animator _animator;
 		private CharacterController _controller;
-		[HideInInspector]
+		//[HideInInspector]
 		public StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
