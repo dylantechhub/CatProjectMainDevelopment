@@ -1,23 +1,44 @@
 fileFormatVersion: 2
-guid: 686d95bb76435fc42bdd73fbbe418294
+guid: c0b5ff04d97541b4c96920e3d9866eea
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: 4781951162920444690
-    second: Cat Run
+      74: 4542889520066078953
+    second: Run
   - first:
-      74: -751813995980742648
-    second: Armature|EmptyAction
+      74: -6544414750640505583
+    second: Armature.001|Armature.001|Armature|EmptyAction
   - first:
-      74: -1327460722861133615
-    second: reference|EmptyAction
+      74: 1570611337149101020
+    second: Armature.001|ArmatureAction.002
   - first:
-      74: -8612994791844490777
-    second: Armature|ArmatureAction (1)
+      74: -159125687261581744
+    second: Armature.001|EmptyAction
   - first:
-      74: -8347513934125448203
-    second: fsgsi
+      74: -1918343668643536891
+    second: Armature.001|mesh_cat.001Action
+  - first:
+      74: -2659925135104766379
+    second: Armature.001|PoseLib
+  - first:
+      74: 7641191188586868856
+    second: Armature.001|reference.001|reference|EmptyAction
+  - first:
+      74: 857904587172705177
+    second: reference.001|ArmatureAction.002
+  - first:
+      74: 4603162959302354282
+    second: reference.001|EmptyAction
+  - first:
+      74: 2561131867616808400
+    second: reference.001|mesh_cat.001Action
+  - first:
+      74: 6849113749257633924
+    second: reference.001|reference.001|reference|EmptyAction
+  - first:
+      74: -3100369314251171874
+    second: Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -48,11 +69,40 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Cat Run
-      takeName: Armature|ArmatureAction
+      name: Run
+      takeName: Armature.001|Armature.001|Armature|ArmatureAction
       internalID: 0
       firstFrame: 0
       lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Armature.001|Armature.001|Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 58
+      lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -133,7 +183,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: Armature.001
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
