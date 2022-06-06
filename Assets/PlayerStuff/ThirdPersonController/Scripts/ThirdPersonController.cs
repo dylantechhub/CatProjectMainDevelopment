@@ -73,7 +73,8 @@ namespace StarterAssets
 		// player
 		[HideInInspector]
 		public float _speed;
-		private float _animationBlend;
+		[HideInInspector]
+		public float _animationBlend;
 		private float _targetRotation = 0.0f;
 		private float _rotationVelocity;
 		public float _verticalVelocity;
