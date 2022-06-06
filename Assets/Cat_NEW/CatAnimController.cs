@@ -32,9 +32,10 @@ public class CatAnimController : MonoBehaviour
         //if idle animation is used, blend to it from here
         
     }
-
+    float t;
     void Main()
     {
+
         //update animator with paramters that would be used by the old animator, makes life much more easier
 
         //sprinting
@@ -44,18 +45,21 @@ public class CatAnimController : MonoBehaviour
             sprinting = true;
             //double the movement speed, therefore sprint
             Cat.SetFloat("motionSpeed", 0.6f);
-            Cat.SetBool("running", true);
-            Cat.SetBool("walking", false);
+
+            Cat.SetFloat("running", Mathf.Lerp(0, 1, t+=0.01f));
+
             Cat.SetBool("idle", false);
         }
         else
         {
+            t = 0;
             Cat.speed = 1;
             sprinting = false;
             //set movment speed to 0, therefore stopping the animation
             Cat.SetFloat("motionSpeed", 0);
-            Cat.SetBool("running", false);
-            Cat.SetBool("walking", false);
+            Cat.SetFloat("running", Mathf.Lerp(1, 0, t += 1));
+
+
             Idle();
         }
 
@@ -65,21 +69,14 @@ public class CatAnimController : MonoBehaviour
         if (TPC._input.move != Vector2.zero && !sprinting)
         {
             Cat.SetFloat("motionSpeed", 0.5f);
-            Cat.SetBool("running", false);
-            Cat.SetBool("walking", true);
+            Cat.SetFloat("running", Mathf.Lerp(1, 0, 1));
             Cat.SetBool("idle", false);
         }
         else if (!sprinting)
         {
             Cat.SetFloat("motionSpeed", 0);
-            Cat.SetBool("walking", false);
-            Cat.SetBool("running", false);
+            Cat.SetFloat("running", Mathf.Lerp(1, 0, 1));
             Idle();
-        }
-
-        if (Cat.GetBool("idle"))
-        {
-           
         }
 
     }

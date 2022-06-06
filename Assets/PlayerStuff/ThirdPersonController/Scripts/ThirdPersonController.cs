@@ -29,6 +29,10 @@ namespace StarterAssets
 		private bool canclimb = false;
 		[Tooltip("Players climb raycast system.")]
 		public LayerMask hitlayers;
+		[Tooltip("Where the raycast is")]
+		public Vector3 Raycastpoint;
+		[Tooltip("Prevents Speed gain")]
+		public float Climbrunspeed;
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -69,7 +73,8 @@ namespace StarterAssets
 		// player
 		[HideInInspector]
 		public float _speed;
-		private float _animationBlend;
+		[HideInInspector]
+		public float _animationBlend;
 		private float _targetRotation = 0.0f;
 		private float _rotationVelocity;
 		public float _verticalVelocity;
@@ -187,20 +192,19 @@ namespace StarterAssets
         {
 			RaycastHit hit;
 
-			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, hitlayers))
+			if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.5f, hitlayers))
 			{
 				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
 				Debug.Log("Did Hit");
 				canclimb = true;
 				Gravity = 0;
-				//player.transform.rotation = Quaternion.Inverse(other.transform.rotation);
-
+				
 			}
 			else
 			{
 				canclimb = false;
 				Gravity = -15f;
-				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+				Debug.DrawRay(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
 			}
 		}
 
@@ -217,7 +221,14 @@ namespace StarterAssets
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            if (canclimb)
+            {
+				currentHorizontalSpeed = Climbrunspeed;
+            }
+            else
+            {
 
+            }
 			float speedOffset = 0.1f;
 			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
@@ -272,8 +283,6 @@ namespace StarterAssets
 				if (Keyboard.current.aKey.isPressed)
 				{ 
 					gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
-					
-					
 				}
 				if (Keyboard.current.dKey.isPressed)
 				{
