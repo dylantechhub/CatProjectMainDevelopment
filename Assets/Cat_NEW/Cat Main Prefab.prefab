@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 6886846101594817830}
   - component: {fileID: 6886846101594817829}
   m_Layer: 0
-  m_Name: Prefab
+  m_Name: Cat Main Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
