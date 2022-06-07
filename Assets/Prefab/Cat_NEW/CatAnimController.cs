@@ -84,7 +84,7 @@ public class CatAnimController : MonoBehaviour
         //walking
         if (TPC._input.move != Vector2.zero && !sprinting)
         {
-            Cat.SetFloat("motionSpeed", 0.5f);
+            Cat.SetFloat("motionSpeed", 0.8f);
             Cat.SetBool("idle", false);
         }
         else if (!sprinting)
