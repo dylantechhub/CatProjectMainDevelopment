@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e258aa8f7d50c7a41acaeef2d6714de7
+guid: 1cd6cdb7f1a9f934aa6d8dd60ca4ae08
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
@@ -63,6 +63,18 @@ ModelImporter:
   - first:
       74: 5522812681064789136
     second: Run
+  - first:
+      74: 5346207612902781591
+    second: Jump UP (IN PLACE)
+  - first:
+      74: -3187301362138002174
+    second: Jump DOWN (IN PLACE)
+  - first:
+      74: 6525125617093268083
+    second: Jump DOWN (MOVING)
+  - first:
+      74: -7703266489654352136
+    second: Jump UP (MOVING)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -125,8 +137,8 @@ ModelImporter:
       name: Walk
       takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
       internalID: 0
-      firstFrame: 134
-      lastFrame: 158
+      firstFrame: 126
+      lastFrame: 157
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -155,7 +167,7 @@ ModelImporter:
       takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
       internalID: 0
       firstFrame: 0
-      lastFrame: 34
+      lastFrame: 36
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -164,6 +176,122 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump UP (IN PLACE)
+      takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 199
+      lastFrame: 204
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump DOWN (IN PLACE)
+      takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 204
+      lastFrame: 209
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump DOWN (MOVING)
+      takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 189
+      lastFrame: 198
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jump UP (MOVING)
+      takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature|ArmatureAction
+      internalID: 0
+      firstFrame: 162
+      lastFrame: 187
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
