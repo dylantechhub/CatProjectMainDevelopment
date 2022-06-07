@@ -107,7 +107,9 @@ public class CatAnimController : MonoBehaviour
             Idle();
         }
 
-
+        
+        Cat.SetBool("grounded", TPC.Grounded);
+        
 
         //jumping, IN PLACE
         if (TPC._input.jump && !sprinting && TPC._input.move == Vector2.zero)
