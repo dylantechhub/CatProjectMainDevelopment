@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using StarterAssets;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,11 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("UI stuff")]
     public Image UImenu;
     public Image OptionsMenu;
-    public Button Continue;
-    public Button Restart;
-    public Button Play;
-    public Button Options;
-    public Button Quit;
+    
 
     [Header("KeyBinding")]
     public bool Escenabled = false;
@@ -29,50 +26,34 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private void Update()
     {
-        PlayerPrefs.SetFloat("VolumePreference", CurrentVolume);
-    }
-    void OnContinue()
-    {
-        UImenu.gameObject.SetActive(false);
-        
-    }
-
-    void OnMenuBack()
-    {
-
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            UImenu.gameObject.SetActive(true);
+            GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = true;
+        }
     }
 
-    void OnRestart()
+    public void OnRestart()
     {
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    void OnPlay()
+    public void OnPlay()
     {
         
     }
 
-    void OnOptionsMenu()
+    public void OnContinue()
     {
-        OptionsMenu.gameObject.SetActive(true);
-        PlayerPrefs.SetFloat("VolumePreference", CurrentVolume);
+        UImenu.gameObject.SetActive(false);
+        GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = false;
     }
 
-    private void OnApplicationQuit()
+    public void OnApplicationQuit()
     {
         Application.Quit();
+        Debug.Log("Quit");
     }
 
-    void Isfullscreen(bool Fullscreen)
-    {
-        Screen.fullScreen = Fullscreen;
-    }
-
-    public void SetVolume(float Volumefloat)
-    {
-        AudioMixer.SetFloat("Master", Volumefloat);
-        CurrentVolume = Volumefloat;
-        
-
-    }
+   
 }
