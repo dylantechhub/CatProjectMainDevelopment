@@ -5,17 +5,17 @@ using StarterAssets;
 
 public class CatAnimController : MonoBehaviour
 {
-    ThirdPersonController TPC;
-    Animator Cat;
+    public ThirdPersonController TPC;
+    public Animator Cat;
 
     void Start()
     {
 
         //get the cats gameobject, then get the TPC
-        TPC = GameObject.Find("cat").GetComponent<ThirdPersonController>();
+        //TPC = GameObject.Find("cat").GetComponent<ThirdPersonController>();
 
         //get the animator
-        Cat = GetComponent<Animator>();
+        //Cat = GetComponent<Animator>();
     }
 
     private bool sprinting;
@@ -107,7 +107,9 @@ public class CatAnimController : MonoBehaviour
             Idle();
         }
 
-
+        
+        Cat.SetBool("grounded", TPC.Grounded);
+        
 
         //jumping, IN PLACE
         if (TPC._input.jump && !sprinting && TPC._input.move == Vector2.zero)
