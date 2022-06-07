@@ -35,6 +35,8 @@ public class CatAnimController : MonoBehaviour
             t_main = 1;
         if (Cat.GetFloat("mainBlend") < 0.5 && !jumping)
             t_main = 0.5f;
+        if (Cat.GetFloat("mainBlend") < 0 && jumping)
+            t_main = 0;
     }
 
 
@@ -105,15 +107,20 @@ public class CatAnimController : MonoBehaviour
             Idle();
         }
 
+
+
         //jumping, IN PLACE
         if (TPC._input.jump && !sprinting && TPC._input.move == Vector2.zero)
         {
             jumping = true;
-            if (Cat.GetFloat("mainBlend") > 0)
-                t_main -= 2.2f * Time.deltaTime;
+
+            //set main blend to Blend to jump blend
+            t_main -= 2.2f * Time.deltaTime;
             Cat.SetFloat("mainBlend", t_main);
 
-        } else if (jumping)
+
+
+        } else if (jumping && TPC.Grounded)
         {
             jumping = false;
 
