@@ -10,6 +10,7 @@ public class CatAnimController : MonoBehaviour
 
     void Start()
     {
+
         //get the cats gameobject, then get the TPC
         TPC = GameObject.Find("cat").GetComponent<ThirdPersonController>();
 
@@ -23,16 +24,23 @@ public class CatAnimController : MonoBehaviour
     void Update()
     {
         Main();
+
+        //blends
+        if (Cat.GetFloat("runningBlend") > 1)
+            t = 1;
+        if (Cat.GetFloat("runningBlend") < 0)
+            t = 0;
     }
 
 
-      void Idle()
+    void Idle()
     {
         Cat.SetBool("idle", true);
-        //if idle animation is used, blend to it from here
         
     }
+
     float t;
+
     void Main()
     {
 
@@ -43,24 +51,32 @@ public class CatAnimController : MonoBehaviour
         {
             Cat.speed = 3f;
             sprinting = true;
+            t += 0.9f * Time.deltaTime;
+
             //double the movement speed, therefore sprint
             Cat.SetFloat("motionSpeed", 0.6f);
 
-            Cat.SetFloat("running", Mathf.Lerp(0, 1, t+=0.01f));
+            Cat.SetFloat("runningBlend", t);
 
             Cat.SetBool("idle", false);
         }
         else
         {
-            t = 0;
-            Cat.speed = 1;
-            sprinting = false;
-            //set movment speed to 0, therefore stopping the animation
-            Cat.SetFloat("motionSpeed", 0);
-            Cat.SetFloat("running", Mathf.Lerp(1, 0, t += 1));
+            //dont blend past 0
+            if (Cat.GetFloat("runningBlend") > 0)
+                t -= 2.2f * Time.deltaTime;
 
+            Cat.SetFloat("runningBlend", t);
 
-            Idle();
+            //only stop the animation if blending is completed
+            if (Cat.GetFloat("runningBlend") <= 0)
+            {
+                Cat.speed = 1;
+                sprinting = false;
+                //set movment speed to 0, therefore stopping the animation
+                Cat.SetFloat("motionSpeed", 0);
+                Idle();
+            }
         }
 
         Cat.SetFloat("speed", TPC._speed);
@@ -69,13 +85,11 @@ public class CatAnimController : MonoBehaviour
         if (TPC._input.move != Vector2.zero && !sprinting)
         {
             Cat.SetFloat("motionSpeed", 0.5f);
-            Cat.SetFloat("running", Mathf.Lerp(1, 0, 1));
             Cat.SetBool("idle", false);
         }
         else if (!sprinting)
         {
             Cat.SetFloat("motionSpeed", 0);
-            Cat.SetFloat("running", Mathf.Lerp(1, 0, 1));
             Idle();
         }
 
