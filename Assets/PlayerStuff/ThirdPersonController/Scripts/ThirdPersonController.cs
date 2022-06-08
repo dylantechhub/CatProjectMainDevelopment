@@ -193,7 +193,7 @@ namespace StarterAssets
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.5f, hitlayers))
+            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.7f, hitlayers))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 Debug.Log("Did Hit");
@@ -282,27 +282,19 @@ namespace StarterAssets
             }
             else if (canclimb)
             {
-                if (Keyboard.current.wKey.isPressed)
+                if (_input.move.y > 0.1f)
                 {
                     gameObject.transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
                 }
-                if (Keyboard.current.sKey.isPressed && !Grounded)
+                if (_input.move.y < -0.1f && !Grounded)
                 {
                     gameObject.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
                 }
-                if (Keyboard.current.aKey.isPressed)
+                if (_input.move.x < -0.1f)
                 {
                     gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
-
-                    Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - Sideoffset, transform.position.z);
-                    RaycastHit hit;
-                        Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
-                    if (Physics.CheckSphere(spherePosition, SideRadius, hitlayers, QueryTriggerInteraction.Ignore))
-                    {
-                        canclimb = false;
-                    }
                 }
-                if (Keyboard.current.dKey.isPressed)
+                if (_input.move.x > 0.1f)
                 {
                     gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
                 }
