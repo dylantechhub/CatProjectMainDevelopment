@@ -77,7 +77,7 @@ ModelImporter:
     second: Jump_moving DOWN
   - first:
       74: -3674280242685057302
-    second: Jump_moving IN AIR
+    second: Jump_global IN AIR
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -311,7 +311,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Jump_moving IN AIR
+      name: Jump_global IN AIR
       takeName: Armature.001|Armature.001|Armature.001|Armature.001|Armature.001|Armature.00
       internalID: 0
       firstFrame: 167
