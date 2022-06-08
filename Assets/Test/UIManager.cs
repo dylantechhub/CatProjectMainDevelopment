@@ -18,19 +18,72 @@ public class UIManager : MonoBehaviour
     [Header("UI stuff")]
     public Image UImenu;
     public Image OptionsMenu;
+
+    [Header("Controller UI")]
+    public Button[] CUIbuttons;
+    public MonoBehaviour[] CallFunction;
+    public int currentbutton;
     
 
-    [Header("KeyBinding")]
-    public bool Escenabled = false;
+    //Keybinding stuff
+    private bool Escenabled = false;
+    private bool ControllerMenu = false;
 
-    // Start is called before the first frame update
+    
     private void Update()
     {
+        if (ControllerMenu)
+        {
+            CUIbuttons[currentbutton].interactable = false;
+        }
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             UImenu.gameObject.SetActive(true);
             GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = true;
+            Escenabled = true;
         }
+        if (Gamepad.current.startButton.wasPressedThisFrame)
+        {
+            UImenu.gameObject.SetActive(true);
+            GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = true;
+            Escenabled = true;
+            ControllerMenu = true;
+        }
+        if (Escenabled)
+        {
+            if (Gamepad.current.leftStick.up.wasPressedThisFrame)
+            {
+                currentbutton--;
+                if (currentbutton < -0)
+                {
+                    currentbutton = 2;
+                }
+                
+            }
+            if (Gamepad.current.leftStick.down.wasPressedThisFrame)
+            {
+                currentbutton++;
+                if (currentbutton > 2)
+                {
+                    currentbutton = 0;
+                }
+            }
+            if (Gamepad.current.aButton.wasPressedThisFrame)
+            {
+                CUIbuttons[currentbutton].onClick.Invoke();
+            }
+        }
+    }
+
+    public void LateUpdate()
+    {
+        if (ControllerMenu)
+        {
+            CUIbuttons[0].interactable = true;
+            CUIbuttons[1].interactable = true;
+            CUIbuttons[2].interactable = true;
+        }
+
     }
 
     public void OnRestart()
@@ -47,6 +100,8 @@ public class UIManager : MonoBehaviour
     {
         UImenu.gameObject.SetActive(false);
         GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = false;
+        Escenabled = false;
+        ControllerMenu = false;
     }
 
     public void OnApplicationQuit()
