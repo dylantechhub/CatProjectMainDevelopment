@@ -8,16 +8,6 @@ public class CatAnimController : MonoBehaviour
     public ThirdPersonController TPC;
     public Animator Cat;
 
-    void Start()
-    {
-
-        //get the cats gameobject, then get the TPC
-        //TPC = GameObject.Find("cat").GetComponent<ThirdPersonController>();
-
-        //get the animator
-        //Cat = GetComponent<Animator>();
-    }
-
     private bool sprinting;
 
     // Update is called once per frame
@@ -33,28 +23,32 @@ public class CatAnimController : MonoBehaviour
 
         if (Cat.GetFloat("mainBlend") > 1)
             t_main = 1;
-        if (Cat.GetFloat("mainBlend") < 0.5 && !jumping)
+        if (Cat.GetFloat("mainBlend") < 0.5)
             t_main = 0.5f;
-        if (Cat.GetFloat("mainBlend") < 0 && jumping)
-            t_main = 0;
     }
 
+    public void Start()
+    {
+        Idle();
+    }
 
     void Idle()
     {
         Cat.SetBool("idle", true);
         
     }
+
     bool jumping = false;
 
     float t_running;
     float t_main;
-    float t_jumpIP;
 
     void Main()
     {
 
         //update animator with paramters that would be used by the old animator, makes life much more easier
+
+        Cat.SetBool("grounded", TPC.Grounded);
 
         //sprinting
         if (TPC._input.sprint)
@@ -105,28 +99,6 @@ public class CatAnimController : MonoBehaviour
                 t_main -= 2.2f * Time.deltaTime;
             Cat.SetFloat("mainBlend", t_main);
             Idle();
-        }
-
-        
-        Cat.SetBool("grounded", TPC.Grounded);
-        
-
-        //jumping, IN PLACE
-        if (TPC._input.jump && !sprinting && TPC._input.move == Vector2.zero)
-        {
-            jumping = true;
-
-            //set main blend to Blend to jump blend
-            t_main -= 2.2f * Time.deltaTime;
-            Cat.SetFloat("mainBlend", t_main);
-
-
-
-        } else if (jumping && TPC.Grounded)
-        {
-            jumping = false;
-
-
         }
 
     }
