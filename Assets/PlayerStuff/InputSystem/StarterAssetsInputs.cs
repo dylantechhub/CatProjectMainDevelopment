@@ -40,12 +40,19 @@ namespace StarterAssets
 		}
         public void OnMove(InputValue value)
 		{
+            if (Menuopen)
+            {
+
+            }
+			else if (!Menuopen)
+            {
 			MoveInput(value.Get<Vector2>());
+		    }
 		}
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if(cursorInputForLook && !Menuopen)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -53,7 +60,10 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+			if (!Menuopen)
+			{
+				JumpInput(value.isPressed);
+			}
 		}
 
 		public void OnSprint(InputValue value)
