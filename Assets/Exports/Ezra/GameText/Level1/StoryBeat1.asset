@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPicture: {fileID: 0}
   title: Firefly
-  textContent: Hey, your house seems to be flooded. don't worry press W A S D to
+  textContent: Hey, your house seems to be flooded. Don't worry press W A S D to
     move around the map.
