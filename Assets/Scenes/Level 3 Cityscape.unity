@@ -558,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6612686472614506767, guid: dc66e242236b1424281429a1b7f2ae72, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc66e242236b1424281429a1b7f2ae72, type: 3}
@@ -880,7 +880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3831679694063990182, guid: f6a645bd8079be7449ff853ccedc693f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 3831679694063990182, guid: f6a645bd8079be7449ff853ccedc693f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8306,6 +8306,10 @@ PrefabInstance:
     - target: {fileID: 6973983373955498417, guid: d4a17aec0c2d73241ba3e7484480b75e, type: 3}
       propertyPath: m_Name
       value: Water_Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973983373955498417, guid: d4a17aec0c2d73241ba3e7484480b75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7747106433277713163, guid: d4a17aec0c2d73241ba3e7484480b75e, type: 3}
       propertyPath: m_RootOrder
