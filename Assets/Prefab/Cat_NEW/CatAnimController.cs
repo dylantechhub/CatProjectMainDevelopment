@@ -40,10 +40,17 @@ public class CatAnimController : MonoBehaviour
 
     //running blend is walking/running blend
     float t_running;
-
+    bool sprintLock;
 
     void Main()
     {
+
+        if (TPC.canclimb && sprinting)
+        {
+            sprintLock = true;
+        }
+        else
+            sprintLock = false;
 
         //update animator with paramters that would be used by the old animator, makes life much more easier
 
@@ -54,7 +61,7 @@ public class CatAnimController : MonoBehaviour
         Cat.SetBool("isClimbing", TPC.canclimb);
 
         //sprinting
-        if (TPC._input.sprint)
+        if (TPC._input.sprint && !sprintLock)
         {
             Cat.speed = 3f;
             sprinting = true;
