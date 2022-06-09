@@ -27,6 +27,11 @@ public class CatAnimController : MonoBehaviour
         Idle();
     }
 
+    void ClimbIdle()
+    {
+        Cat.SetBool("climbIdle", true);
+    }
+
     void Idle()
     {
         Cat.SetBool("idle", true);
@@ -46,6 +51,8 @@ public class CatAnimController : MonoBehaviour
 
         Cat.SetFloat("mainBlend", TPC._speed / 1);
 
+        Cat.SetBool("isClimbing", TPC.canclimb);
+
         //sprinting
         if (TPC._input.sprint)
         {
@@ -56,6 +63,7 @@ public class CatAnimController : MonoBehaviour
             Cat.SetFloat("runningBlend", t_running);
 
             Cat.SetBool("idle", false);
+            Cat.SetBool("climbIdle", false);
         }
         else
         {
@@ -70,9 +78,11 @@ public class CatAnimController : MonoBehaviour
             {
                 Cat.speed = 1;
                 sprinting = false;
-                //set movment speed to 0, therefore stopping the animation
-                
-                Idle();
+
+                if (!TPC.canclimb)
+                    Idle();
+                else
+                    ClimbIdle();
             }
         }
 
@@ -81,13 +91,16 @@ public class CatAnimController : MonoBehaviour
         //walking
         if (TPC._input.move != Vector2.zero && !sprinting)
         {
+            Cat.SetBool("climbIdle", false);
 
             Cat.SetBool("idle", false);
         }
         else if (!sprinting)
         {
-
-            Idle();
+            if (!TPC.canclimb)
+                Idle();
+            else
+                ClimbIdle();
         }
 
     }
