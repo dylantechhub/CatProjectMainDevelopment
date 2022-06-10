@@ -26,7 +26,8 @@ namespace StarterAssets
         public float SpeedChangeRate = 10.0f;
 
         [Space(10)]
-        private bool canclimb = false;
+        [HideInInspector]
+        public bool canclimb = false;
         [Tooltip("Players climb raycast system.")]
         public LayerMask hitlayers;
         [Tooltip("Where the raycast is")]
