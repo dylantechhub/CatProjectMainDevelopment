@@ -29,12 +29,13 @@ namespace StarterAssets
         {
 			if (!Menuopen)
 			{
-
+				
 
 				Cursor.lockState = CursorLockMode.Locked;
 			}
 			else if (Menuopen)
 			{
+				move = new Vector2(0, 0);
 				Cursor.lockState = CursorLockMode.None;
 			}
 		}
@@ -42,7 +43,7 @@ namespace StarterAssets
 		{
             if (Menuopen)
             {
-
+				
             }
 			else if (!Menuopen)
             {

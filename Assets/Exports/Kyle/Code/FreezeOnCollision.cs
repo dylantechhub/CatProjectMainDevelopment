@@ -8,9 +8,10 @@ public class FreezeOnCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Untagged")
+        if(collision.gameObject.tag == "Player")
         {
-           m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;           
+            m_Rigidbody.freezeRotation = false;
+            Debug.Log("Trigger");
         }
     }
 }
