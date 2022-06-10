@@ -149,7 +149,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.128999, y: 1}
+    m_SensorSize: {x: 2.8784313, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 2677183128077991322}
   - component: {fileID: 6886846102327625712}
   - component: {fileID: 1285213911541667209}
+  - component: {fileID: 1535945855}
   m_Layer: 8
   m_Name: cat
   m_TagString: Player
@@ -413,6 +414,18 @@ MonoBehaviour:
   _animIDMotionSpeed: 0
   _animator: {fileID: 0}
   _input: {fileID: 0}
+--- !u!114 &1535945855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677183128077991318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a14a4c972542264da0d31ab427d18d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2887961948657479285
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +488,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.128999, y: 1}
+    m_SensorSize: {x: 2.8784313, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -633,7 +646,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.128999, y: 1}
+    m_SensorSize: {x: 2.8784313, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
