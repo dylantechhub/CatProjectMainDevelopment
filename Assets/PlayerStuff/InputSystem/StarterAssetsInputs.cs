@@ -57,6 +57,10 @@ namespace StarterAssets
 			{
 				LookInput(value.Get<Vector2>());
 			}
+			else if (Menuopen)
+            {
+				look = new Vector2(0, 0);
+            }
 		}
 
 		public void OnJump(InputValue value)
