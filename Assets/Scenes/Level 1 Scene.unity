@@ -1470,7 +1470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612411384}
   m_LocalRotation: {x: 1.2843158e-10, y: 0.8704649, z: -2.605402e-12, w: 0.49223053}
-  m_LocalPosition: {x: 14.6, y: -3.84, z: -5.34}
+  m_LocalPosition: {x: 23.33, y: -3.84, z: -5.22}
   m_LocalScale: {x: 5.2375493, y: 8.031164, z: 6.312812}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8724,6 +8724,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIStoryEventManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DEBUG_MODE: 0
 --- !u!4 &2689629936155486688
 Transform:
@@ -9606,7 +9618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2689629936822461515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.5, y: 3.17, z: 46.19}
+  m_LocalPosition: {x: -41.26, y: 3.17, z: 47.84}
   m_LocalScale: {x: 1, y: 1.8143, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9989,6 +10001,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bb1250d4365043040ba00bf97fd4db83, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f16118a918695d946be45c2baf409803, type: 2}
     - target: {fileID: 919132149155446097, guid: bb1250d4365043040ba00bf97fd4db83, type: 3}
       propertyPath: m_Name
       value: Cat_Room_1
