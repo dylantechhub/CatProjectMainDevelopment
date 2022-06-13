@@ -51,9 +51,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -3215555783603854218, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -2932998491564163895, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
       propertyPath: m_Name
-      value: Tree 1 (Colliders)
+      value: Tree 1 (Colliders) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424396828587804706, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914173764048766335, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 34990eccf4cb0854d812fecb5641e0b6, type: 3}
       propertyPath: m_Materials.Array.data[0]
