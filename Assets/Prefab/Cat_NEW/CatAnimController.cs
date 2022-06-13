@@ -35,7 +35,7 @@ public class CatAnimController : MonoBehaviour
     void Idle()
     {
         Cat.SetBool("idle", true);
-        
+
     }
 
     //running blend is walking/running blend
@@ -60,17 +60,21 @@ public class CatAnimController : MonoBehaviour
 
         Cat.SetBool("isClimbing", TPC.canclimb);
 
+
         //sprinting
-        if (TPC._input.sprint && !sprintLock)
+        if (TPC._input.sprint)
         {
-            Cat.speed = 3f;
             sprinting = true;
-            t_running += 0.9f * Time.deltaTime;
+            if (!sprintLock)
+            {
+                Cat.speed = 3f;
+                t_running += 0.9f * Time.deltaTime;
 
-            Cat.SetFloat("runningBlend", t_running);
+                Cat.SetFloat("runningBlend", t_running);
 
-            Cat.SetBool("idle", false);
-            Cat.SetBool("climbIdle", false);
+                Cat.SetBool("idle", false);
+                Cat.SetBool("climbIdle", false);
+            }
         }
         else
         {
@@ -83,17 +87,16 @@ public class CatAnimController : MonoBehaviour
             //only stop the animation if blending is completed
             if (Cat.GetFloat("runningBlend") <= 0)
             {
-                Cat.speed = 1;
                 sprinting = false;
-
-                if (!TPC.canclimb)
+                if (!sprintLock)
+                {
+                    Cat.speed = 1;
                     Idle();
-                else
-                    ClimbIdle();
+                }
             }
         }
 
-       
+
 
         //walking
         if (TPC._input.move != Vector2.zero && !sprinting)
