@@ -14,5 +14,11 @@ public class FreezeOnCollision : MonoBehaviour
             isTriggerd = true;
             Debug.Log("Trigger");
         }
+
+       if (collision.gameObject.tag == "Untagged")
+        {
+            m_Rigidbody.freezeRotation = true;
+            Debug.Log("Trigger");
+        }
     }
 }
