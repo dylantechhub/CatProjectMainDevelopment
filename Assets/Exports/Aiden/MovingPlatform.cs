@@ -77,36 +77,40 @@ public class MovingPlatform : MonoBehaviour
         posZ = transform.position.z;
     }
 
+    private bool Align = true;
+
     private void Update()
     {
 
 
-        //Alingners, keep the platform on path.
-        if (X && !Y && !Z)
-        {
-            transform.position = new Vector3(transform.position.x, posY, posZ);
-        } else if (!X && Y && !Z)
-        {
-            transform.position = new Vector3(posX, transform.position.y, posZ);
-        } else if (!X && !Y && Z)
-        {
-            transform.position = new Vector3(posX, posY, transform.position.z);
-        } else if (X && Y && !Z)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
-        } else if (!X && Y && Z)
-        {
-            transform.position = new Vector3(posX, transform.position.y, transform.position.z);
-        } else if (X && Y && Z)
-        {
-            if (GlobalDebugMode)
-            Debug.LogAssertion($"[MPC]: All Axis' For Platform: {MovingPlatformID} Have been enabled!\nPlease note that this could cause path issues.");
-        }
-        
-    }
+        if (Align)
+            if (X && !Y && !Z)
+            {
+                transform.position = new Vector3(transform.position.x, posY, posZ);
+            }
+            else if (!X && Y && !Z)
+            {
+                transform.position = new Vector3(posX, transform.position.y, posZ);
+            }
+            else if (!X && !Y && Z)
+            {
+                transform.position = new Vector3(posX, posY, transform.position.z);
+            }
+            else if (X && Y && !Z)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
+            }
+            else if (!X && Y && Z)
+            {
+                transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+            }
+            else if (X && Y && Z)
+            {
+                if (GlobalDebugMode)
+                    Debug.LogAssertion($"[MPC]: All Axis' For Platform: {MovingPlatformID} Have been enabled!\nPlease note that this could cause path issues.");
+            }
 
-    private void FixedUpdate()
-    {
+
         //FORWARD DIRECTION AXIS CONTROLLER
 
         //X Axis
@@ -199,14 +203,16 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag == MovingPlatformID+"_REVERSE" && UsingTrigger)
         {
-            stop = true;
+            forward = false;
+            reverse = false;
             if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Reverse");
             StartCoroutine(Reverse());
         }
         else if (collision.gameObject.tag == MovingPlatformID + "_FORWARDS" && UsingTrigger)
         {
-            stop = true;
+            forward = false;
+            reverse = false;
             if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Forwards");
             StartCoroutine(Forwards());
@@ -228,14 +234,16 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.tag == MovingPlatformID + "_REVERSE" && !UsingTrigger)
         {
-            stop = true;
+            forward = false;
+            reverse = false;
             if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID}: Hit Reverse");
             StartCoroutine(Reverse());
         }
         else if (collision.gameObject.tag == MovingPlatformID + "_FORWARDS" && !UsingTrigger)
         {
-            stop = true;
+            forward = false;
+            reverse = false;
             if (GlobalDebugMode)
             print($"[MPC]: {MovingPlatformID} Hit Forwards");
             StartCoroutine(Forwards());

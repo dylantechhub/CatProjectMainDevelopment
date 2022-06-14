@@ -16,11 +16,29 @@ public class PlayerPlatformDetector : MonoBehaviour
             Cat.transform.SetParent(collision.transform);
             off = true;
         } else if (off) {
-            //end player rotation
+            //end
             off = false;
-                print(collision.gameObject.tag);
             Cat.transform.SetParent(null);
             Cat.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
             }
         }
+
+    Ray ray;
+
+    void Update()
+    {
+        ray = new Ray(transform.position, -transform.up);
+        Debug.DrawRay(ray.origin, ray.direction * 5);
+        RaycastHit hitData;
+        if (Physics.Raycast(ray, out hitData, 5))
+        {
+            if (!hitData.transform.gameObject.GetComponent<MovingPlatform>())
+            {
+                //end
+                off = false;
+                Cat.transform.SetParent(null);
+                Cat.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
+            }
+        }
+    }
 }
