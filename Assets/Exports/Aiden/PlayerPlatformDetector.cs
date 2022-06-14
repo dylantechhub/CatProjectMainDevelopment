@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPlatformDetector : MonoBehaviour
 {
     private bool off;
+    public GameObject Cat;
     //detect if the player is standing on a platform type
     //this script is global to all platforms, with no hassle. Attach to the playerarmature.
     private void OnControllerColliderHit(ControllerColliderHit collision)
@@ -12,14 +13,32 @@ public class PlayerPlatformDetector : MonoBehaviour
         //GLOBAL PLATFORMS
             if (collision.gameObject.tag == "Platform")
             {
-            transform.SetParent(collision.transform);
+            Cat.transform.SetParent(collision.transform);
             off = true;
         } else if (off) {
-            //end player rotation
+            //end
             off = false;
-                print(collision.gameObject.tag);
-                this.transform.SetParent(null);
-                this.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
+            Cat.transform.SetParent(null);
+            Cat.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
             }
         }
+
+    Ray ray;
+
+    void Update()
+    {
+        ray = new Ray(transform.position, -transform.up);
+        Debug.DrawRay(ray.origin, ray.direction * 5);
+        RaycastHit hitData;
+        if (Physics.Raycast(ray, out hitData, 5))
+        {
+            if (!hitData.transform.gameObject.GetComponent<MovingPlatform>())
+            {
+                //end
+                off = false;
+                Cat.transform.SetParent(null);
+                Cat.transform.position += new Vector3(0.0f, 1.0f, 0.0f);
+            }
+        }
+    }
 }

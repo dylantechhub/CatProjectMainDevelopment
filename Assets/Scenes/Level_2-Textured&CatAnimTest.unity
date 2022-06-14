@@ -128,6 +128,11 @@ Light:
   m_CorrespondingSourceObject: {fileID: 8100821904199577980, guid: 26d3957d728f32d4ea623c2f94b402fa, type: 3}
   m_PrefabInstance: {fileID: 8100821904548636056}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1696757796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2677183128077991318, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+  m_PrefabInstance: {fileID: 3059179114324355563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2037705192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +197,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 956763355, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: CatOBJ
+      value: 
+      objectReference: {fileID: 1696757796}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 181030701789948406, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e050309726d0548ad9d8ad7177cdc447, type: 2}
+    - target: {fileID: 2677183128077991324, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6886846101594817830, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -239,6 +280,10 @@ PrefabInstance:
     - target: {fileID: 6886846101594817831, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
       propertyPath: m_Name
       value: CatWithCameras
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886846102327625712, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3f17d6369bd1841bab2e1e7b900ab5, type: 3}
