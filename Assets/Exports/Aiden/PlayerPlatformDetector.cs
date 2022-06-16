@@ -6,7 +6,15 @@ public class PlayerPlatformDetector : MonoBehaviour
 {
     private bool off;
     public GameObject Cat;
-    //detect if the player is standing on a platform type
+
+    private void Start()
+    {
+        Cat = transform.parent.gameObject;
+    }
+
+    //detect if the player i
+    //
+    //s standing on a platform type
     //this script is global to all platforms, with no hassle. Attach to the playerarmature.
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
