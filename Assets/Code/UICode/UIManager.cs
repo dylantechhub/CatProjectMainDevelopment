@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
             GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = true;
             Escenabled = true;
         }
-        if (Gamepad.current.startButton.wasPressedThisFrame)
+        if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
         {
             UImenu.gameObject.SetActive(true);
             GameObject.Find("cat").GetComponent<StarterAssetsInputs>().Menuopen = true;
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
         }
         if (Escenabled)
         {
-            if (Gamepad.current.leftStick.up.wasPressedThisFrame)
+            if (Gamepad.current != null && Gamepad.current.leftStick.up.wasPressedThisFrame)
             {
                 currentbutton--;
                 if (currentbutton < -0)
@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
                 }
                 
             }
-            if (Gamepad.current.leftStick.down.wasPressedThisFrame)
+            if (Gamepad.current != null && Gamepad.current.leftStick.down.wasPressedThisFrame)
             {
                 currentbutton++;
                 if (currentbutton > 2)
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
                     currentbutton = 0;
                 }
             }
-            if (Gamepad.current.aButton.wasPressedThisFrame)
+            if (Gamepad.current != null && Gamepad.current.aButton.wasPressedThisFrame)
             {
                 CUIbuttons[currentbutton].onClick.Invoke();
             }
