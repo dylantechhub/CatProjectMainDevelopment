@@ -26,8 +26,10 @@ namespace StarterAssets
         public float SpeedChangeRate = 10.0f;
 
         [Space(10)]
-        [HideInInspector]
+        //[HideInInspector]
         public bool canclimb = false;
+        //Prevents the cat from climbing for 5s
+        private float ClimbCooldown = 5f; 
         [Tooltip("Players climb raycast system.")]
         public LayerMask hitlayers;
         [Tooltip("Where the raycast is")]
@@ -134,6 +136,7 @@ namespace StarterAssets
 
         private void Update()
         {
+            ClimbCooldown -= Time.deltaTime;
             _hasAnimator = TryGetComponent(out _animator);
             if (canclimb == false)
             {
@@ -194,7 +197,7 @@ namespace StarterAssets
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.7f, hitlayers))
+            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.7f, hitlayers) && ClimbCooldown < 0)
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 canclimb = true;
@@ -298,6 +301,14 @@ namespace StarterAssets
                 {
                     gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
                 }
+                if (Keyboard.current.spaceKey.wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
+                {
+                    Debug.Log("Stop climbing");
+                    Gravity = -15;
+                    ClimbCooldown = 5;
+                    canclimb = false;
+                }
+                
             }
             // update animator if using character
             if (_hasAnimator)

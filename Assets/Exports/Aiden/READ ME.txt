@@ -79,7 +79,7 @@ To use global methods for Platforms please add
 
 
 Legend:
-CLASS.METHOD( PARAMETERS ) ( RETURN TYPE ) get; set; - DEFINITION
+(METHOD().)CLASS.METHOD( PARAMETERS ) ( RETURN TYPE ) get; set; - DEFINITION
 
 RetreivePlatformsLength{
 
@@ -89,28 +89,76 @@ RetreivePlatformsLength.All() (Array) get; - Returns all platforms lengths in sc
 
 }
 
-RotationSpeed {
-
-    RotationSpeed.SetGlobal(float speed) (void) set; - Set the global rotation speed for all RPs
-    RotationSpeed.SetLocal(float speed, string ID) (void) set; - Sets the local rotation speed of a RP via ID
-    RotationSpeed.GetLocal(string ID) (float) get; - Gets the local rotation speed of a RP via ID
-
-}
-
-MovementSpeed {
-
-    MovementSpeed.SetGlobal(float speed) (void) set; - Set the global movement speed for all MPs
-    MovementSpeed.SetLocal(float speed, string ID) (void) set; - Sets the local movement speed via ID
-    MovementSpeed.GetLocal(string ID) (float) get; - Gets the local movement speed via ID
-
-}
-
+READ THIS. VERI IMPORTANT!!!!
+\/ \/ \/ \/ \/ \/ \/
 GetPlatform {
 
-    GetPlatform.MovingPlatformGameObject(string ID) (GameObject) get; - Get a moving platforms gameObject
-    GetPlatform.RotatingPlatformGameObject(string ID) (GameObject) get; - Get a rotating platforms gameObject
-    GetPlatform.Exists(string ID, int method) (bool) get; - check if a certain platform exists via ID
-
+    GetPlatform.MovingPlatform(string ID) (GameObject) get; - Get a moving platform
+    GetPlatform.RotatingPlatform(string ID) (GameObject) get; - Get a rotating platform
+    GetPlatform.MPExists(string ID) (bool) get; - check if a certain MP exists via ID
+    GetPlatform.RPExists(string ID) (bool) get; - check if a certain RP exists via ID
 }
-!MORE SOON!
+
+
+
+EditPlatforms {
+
+    Rotating Platforms {
+
+       EditPlatforms.Rotating(RP_PLATFORM_OBJ).SwitchDirections = true | false  get; set; - Switch the rotation direction
+
+       EditPlatforms.Rotating(RP_PLATFORM_OBJ).Remove() (void) set; - Removes the platform from the rotating platforms list
+
+       EditPlatforms.Rotating(RP_PLATFORM_OBJ).Change(GameObject switchTo) (void) set; - Changes the platforms gameobject
+
+       RotationSpeed.SetGlobal(float speed) (void) set; - Set the global rotation speed for all RPs
+
+       RotationSpeed.SetLocal(float speed, string ID) (void) set; - Sets the local rotation speed of a RP via ID
+       
+       RotationSpeed.GetLocal(string ID) (float) get; - Gets the local rotation speed of a RP via ID
+
+    }
+    Moving Platforms {
+       
+       MovementSpeed.SetGlobal(float speed) (void) set; - Set the global movement speed for all MPs
+       
+       MovementSpeed.SetLocal(float speed, string ID) (void) set; - Sets the local movement speed via ID
+       
+       MovementSpeed.GetLocal(string ID) (float) get; - Gets the local movement speed via ID
+       
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Delay = float - sets the platforms delay
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).UsingTrigger = true | false - sets the platforms collision detection mode
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).speed = float - sets the platforms moving speed
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).X = true | false - if true, platform will move on the X axis
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Y = true | false - if true, platform will move on the Y axis
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Z = true | false - if true, platform will move on the Z axis
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Pause() (void) set; - pauses the platform
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Resume() (void) set; - resumes the platfroms movement path, if stopped
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).isPaused() (bool) get; - returns true if the platform is paused
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).GoForwards() (void) set; - moves the platform in its forwards direction
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).GoReverse() (void) set; - moves the platform in its reverse direction
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).MovingWhere() (string) get; - returns a string based on what direction the platform is moving in
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).METHODS - the list of methods being used by the platform (X, Y, Z) Use .Contains() to determin if an axis is being used
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).Direction = true | false - if true, it will switch the directions forwards & reverse, therefore switch its directions
+
+
+       EditPlatforms.Moving(MP_PLATFORM_OBJ).EnablePlatform(float delay, float speedFPC, string METHOD_X, string METHOD_Y, string METHOD_Z, bool DIRECTION, bool usingTrigger, bool globalDebugMode)
+       (void) set; - Enables the platform. Usually done by the PlatforController, unless its not in the list, and is on its own.
+       }
+
+
+    }
 }

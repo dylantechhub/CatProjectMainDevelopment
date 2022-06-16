@@ -1,3 +1,4 @@
+using static MainPlatformController.PlatformController;
 //remote platform methods
 
 /// <summary>
@@ -10,10 +11,10 @@ namespace PlatformsData
     public static class PlatformRemoteLength
     {
 
-        public static int[] GetMethodRPA(PlatformController PC)
+        public static int[] GetMethodRPA(MainPlatformController.PlatformController PC)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+            UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             var A1 = 0;
             if (PC.rotatingPlatforms != null)
                 A1 = PC.rotatingPlatforms.ToArray().Length;
@@ -23,10 +24,10 @@ namespace PlatformsData
             return AAR;
         }
 
-        public static int[] GetMethodMPA(PlatformController PC)
+        public static int[] GetMethodMPA(MainPlatformController.PlatformController PC)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             var A2 = 0;
             if (PC.movingPlatforms != null)
                 A2 = PC.movingPlatforms.ToArray().Length;
@@ -36,10 +37,10 @@ namespace PlatformsData
             return AAR;
         }
 
-        public static int[] GetMethodAll(PlatformController PC)
+        public static int[] GetMethodAll(MainPlatformController.PlatformController PC)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             var A1 = PC.rotatingPlatforms.ToArray().Length;
             var A2 = PC.movingPlatforms.ToArray().Length;
             var AA = A2 + A1;
@@ -47,10 +48,10 @@ namespace PlatformsData
             return AAR;
         }
 
-        public static int GetMethodMP(PlatformController PC)
+        public static int GetMethodMP(MainPlatformController.PlatformController PC)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             if (PC.movingPlatforms == null)
             {
                 return 0;
@@ -62,10 +63,10 @@ namespace PlatformsData
             }
         }
 
-        public static int GetMethodRP(PlatformController PC)
+        public static int GetMethodRP(MainPlatformController.PlatformController PC)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             if (PC.rotatingPlatforms == null)
             {
                 return 0;
@@ -82,20 +83,20 @@ namespace PlatformsData
 
     public static class SetRotationSpeedRemote
     { 
-        public static void SetGlobal(PlatformController PC, float speed)
+        public static void SetGlobal(MainPlatformController.PlatformController PC, float speed)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+            UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             foreach (var p in PC.rotatingPlatforms)
             {
                 p.LocalRotationSpeed = speed;
             }
         }
 
-        public static void SetLocal(PlatformController PC, float speed, string ID)
+        public static void SetLocal(MainPlatformController.PlatformController PC, float speed, string ID)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             foreach (var p in PC.rotatingPlatforms)
             {
                 if (p.ID == ID)
@@ -105,10 +106,10 @@ namespace PlatformsData
             }
         }
 
-        public static float GetLocal(PlatformController PC, string ID)
+        public static float GetLocal(MainPlatformController.PlatformController PC, string ID)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
                 foreach (var p in PC.rotatingPlatforms)
                 {
                     if (p.ID == ID)
@@ -122,20 +123,20 @@ namespace PlatformsData
 
         public static class SetMovementSpeedRemote
     { 
-        public static void SetGlobal(PlatformController PC, float speed)
+        public static void SetGlobal(MainPlatformController.PlatformController PC, float speed)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             foreach (var p in PC.movingPlatforms)
             {
                 p.LocalPlatformMovingSpeed = speed;
             }
         }
 
-        public static void SetLocal(PlatformController PC, float speed, string ID)
+        public static void SetLocal(MainPlatformController.PlatformController PC, float speed, string ID)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
             foreach (var p in PC.movingPlatforms)
             {
                 if (p.ID == ID)
@@ -145,10 +146,10 @@ namespace PlatformsData
             }
         }
 
-        public static float GetLocal(PlatformController PC, string ID)
+        public static float GetLocal(MainPlatformController.PlatformController PC, string ID)
         {
             if (PC.GlobalDebugMode)
-            PlatformController.print("[PLATFORMS@REMOTE]: Call Complete!");
+                UnityEngine.MonoBehaviour.print("[PLATFORMS@REMOTE]: Call Complete!");
                 foreach (var p in PC.movingPlatforms)
                 {
                     if (p.ID == ID)
@@ -164,7 +165,7 @@ namespace PlatformsData
 
     public static class PlatformControllerScript
     {
-        public static PlatformController Script { get; set; }
+        public static MainPlatformController.PlatformController Script { get; set; }
     }
 
 }

@@ -8,6 +8,8 @@ TagManager:
   - example_REVERSE
   - Platform
   - example_FORWARDS
+  - Bridge
+  - Building
   layers:
   - Default
   - TransparentFX
