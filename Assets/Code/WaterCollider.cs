@@ -14,7 +14,7 @@ public class WaterCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isSplashing = true;
-            waterParticles.transform.position = catTransform.position;
+            waterParticles.transform.position = catTransform.localPosition;
             waterParticles.Play();
         }
     }
