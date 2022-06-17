@@ -197,12 +197,13 @@ namespace StarterAssets
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.7f, hitlayers) && ClimbCooldown < 0)
+            if (Physics.Raycast(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward), out hit, 0.7f, hitlayers))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 canclimb = true;
                 Gravity = 0;
-
+                
+                
             }
             else
             {
@@ -301,13 +302,7 @@ namespace StarterAssets
                 {
                     gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
                 }
-                if (Keyboard.current.spaceKey.wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
-                {
-                    Debug.Log("Stop climbing");
-                    Gravity = -15;
-                    ClimbCooldown = 5;
-                    canclimb = false;
-                }
+
                 
             }
             // update animator if using character
