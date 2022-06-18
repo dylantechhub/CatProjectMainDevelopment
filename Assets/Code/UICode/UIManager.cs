@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
-using StarterAssets;
+using Options;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,12 +17,11 @@ public class UIManager : MonoBehaviour
     [Header("UI stuff")]
     public GameObject UImenu;
     public GameObject OptionsMenu;
+    public TextMeshProUGUI Devices;
 
     [Header("Controller UI")]
     public List<Button> CUIbuttons = new List<Button>();
     public List<Slider> CUISliders = new List<Slider>();
-    public int currentbutton = 0;
-    public int currentOption = 44444;
     //lock controller controls for uses for other options
     public bool ControllerLock;
 
@@ -37,6 +36,11 @@ public class UIManager : MonoBehaviour
     
     private void Update()
     {
+        if (ControllerMenu)
+            Devices.text = $"Current Controls:\n Controller/Gamepad";
+        else if (!ControllerMenu)
+            Devices.text = $"Current Controls:\n Keyboard&Mouse";
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             UImenu.SetActive(true);
@@ -45,47 +49,24 @@ public class UIManager : MonoBehaviour
         }
 
         //controller menu open
-        if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame && !ControllerLock)
+        if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
         {
             UImenu.SetActive(true);
             //changed the variable Menuopen to static, allowing this. no refrence needs to be made to change this variable.
             StarterAssets.StarterAssetsInputs.Menuopen = true;
             Escenabled = true;
             ControllerMenu = true;
+            CUIbuttons[0].Select();
         }
 
         //if menu opened
         if (Escenabled)
         {
 
-            //sort through menu up
-            if (Gamepad.current != null && Gamepad.current.leftStick.up.wasPressedThisFrame && !ControllerLock && !inOptions)
-                currentbutton--;
-                if (currentbutton < 0)
-                    currentbutton = 3;
-
-            //sort through menu down
-            if (Gamepad.current != null && Gamepad.current.leftStick.down.wasPressedThisFrame && !ControllerLock && !inOptions)
-                currentbutton++;
-                if (currentbutton > 3)
-                    currentbutton = 0;
-
-            //if controller went left to options menu, then allow changing of the options
-            if (Gamepad.current != null && Gamepad.current.leftStick.left.wasPressedThisFrame && !ControllerLock && !inOptions)
-            {
-                currentbutton = 44444;
-                inOptions = true;
-                //options: 0: SFXVol, 1: MSTRVol, 2: MSICVol,
-                currentOption = 0;
-            }
-
             //if controller went right to menu from options, then allow menu selection
             if (Gamepad.current != null && Gamepad.current.leftStick.right.wasPressedThisFrame && !ControllerLock && inOptions)
             {
-                //options: 0: continue, 1: restart, 2: options, 3: quit
-                currentbutton = 3;
                 inOptions = false;
-                currentOption = 44444;
             }
 
 
@@ -96,13 +77,10 @@ public class UIManager : MonoBehaviour
                 if (ControllerLock)
                 {
                     ControllerLock = false;
-                    currentbutton = 3;
                     inOptions = false;
-                    currentOption = 44444;
                 }
                 else
                     Continue();
-
             }
 
             //detect if slider is being changed, then go into slider changing mode
@@ -115,31 +93,22 @@ public class UIManager : MonoBehaviour
                 ControllerSliding = false;
             }
 
-
-            if (!inOptions && !ControllerLock)
-            if (currentbutton==0)CUIbuttons[currentbutton].Select();if(currentbutton==1)CUIbuttons[currentbutton].Select();if(currentbutton==2)CUIbuttons[currentbutton].Select();if(currentbutton==3)CUIbuttons[currentbutton].Select();
-
-            if (inOptions)
-            {
-                //sort through options up
-                if (Gamepad.current != null && Gamepad.current.leftStick.up.wasPressedThisFrame && !ControllerLock)
-                    currentOption++;
-                    if (currentOption > 2)
-                        currentOption = 0;
-
-                //sort through options down
-                if (Gamepad.current != null && Gamepad.current.leftStick.down.wasPressedThisFrame && !ControllerLock)
-                    currentOption--;
-                if (currentOption < 0)
-                    currentOption = 2;
-
-
-
-            }
         }
     }
 
+    private void Start()
+    {
+        CUISliders[0].value = OptionData.SFXVOL;
+        CUISliders[2].value = OptionData.MSTRVOL;
+        CUISliders[1].value = OptionData.MSICVOL;
+    }
 
+    private void FixedUpdate()
+    {
+        OptionData.SFXVOL = CUISliders[0].value;
+        OptionData.MSTRVOL = CUISliders[2].value;
+        OptionData.MSICVOL = CUISliders[1].value;
+    }
 
     public void Restart()
     {
@@ -155,6 +124,35 @@ public class UIManager : MonoBehaviour
             else
             OptionsMenu.SetActive(false);
     }
+
+    public void ChangeQualityPreset(TMP_Dropdown dd)
+    {
+        if (dd.value == 3)
+            QualitySettings.SetQualityLevel(0, true);
+        if (dd.value == 2)
+            QualitySettings.SetQualityLevel(1, true);
+        if (dd.value == 1)
+            QualitySettings.SetQualityLevel(2, true);
+        if (dd.value == 0)
+            QualitySettings.SetQualityLevel(3, true);
+    }
+
+    public void ChangeFullscreenMode(TMP_Dropdown dd)
+    {
+        if (dd.value == 0)
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+        if (dd.value == 1)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        if (dd.value == 2)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+    }
+
 
     public void ChangeSFXVolume(Slider slider)
     {
