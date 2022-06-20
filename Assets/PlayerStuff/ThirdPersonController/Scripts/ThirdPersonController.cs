@@ -133,19 +133,16 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
+        public bool StopClimbing;
 
         private void Update()
         {
             ClimbCooldown -= Time.deltaTime;
             _hasAnimator = TryGetComponent(out _animator);
-            if (canclimb == false)
-            {
-                Gravity = -15;
-
-            }
             JumpAndGravity();
             GroundedCheck();
             Move();
+            if (!StopClimbing)
             Climbcast();
         }
 
@@ -201,9 +198,7 @@ namespace StarterAssets
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 canclimb = true;
-                Gravity = 0;
-                
-                
+                Gravity = 0; 
             }
             else
             {
@@ -288,23 +283,41 @@ namespace StarterAssets
             {
                 if (_input.move.y > 0.1f)
                 {
-                    gameObject.transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+                    //gameObject.transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+                    _controller.Move(new Vector3(0, 2 * Time.deltaTime, 0));
                 }
-                if (_input.move.y < -0.1f && !Grounded)
+                if (_input.move.y < -0.1f)
                 {
-                    gameObject.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                    //gameObject.transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                    _controller.Move(new Vector3(0, -2 * Time.deltaTime, 0));
                 }
                 if (_input.move.x < -0.1f)
                 {
-                    gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
+                    //gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
+                    _controller.Move(new Vector3(-2 * Time.deltaTime, 0, 0));
                 }
                 if (_input.move.x > 0.1f)
                 {
-                    gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
+                    //gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
+                    _controller.Move(new Vector3(2 * Time.deltaTime, 0, 0));
                 }
-
                 
+                if (canclimb && _input.jump)
+                {
+                    print(canclimb);
+                    StopClimbing = true;
+                    Gravity = -15f;
+                    Quaternion targetRotation1 = Quaternion.Euler(0, -180, 0);
+                    Quaternion targetRotation2 = Quaternion.Euler(0, -180, 0);
+
+                    if (gameObject.transform.rotation.eulerAngles.y.ToString().Contains("-"))
+                        gameObject.transform.rotation = targetRotation1;
+                    else
+                        gameObject.transform.rotation = targetRotation2;
+                    canclimb = false;
+                }
             }
+
             // update animator if using character
             if (_hasAnimator)
             {
@@ -317,6 +330,7 @@ namespace StarterAssets
         {
             if (Grounded)
             {
+                StopClimbing = false;
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
 
@@ -332,10 +346,6 @@ namespace StarterAssets
                 {
                     _verticalVelocity = -2f;
                 }
-
-
-
-
 
                 // Jump
                 if (_input.jump)
@@ -379,6 +389,7 @@ namespace StarterAssets
                 }
 
                 // if we are not grounded, do not jump
+                if (!canclimb)
                 _input.jump = false;
             }
 

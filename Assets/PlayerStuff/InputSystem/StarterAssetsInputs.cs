@@ -12,7 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-		public bool Menuopen = false;
+		public static bool Menuopen;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;

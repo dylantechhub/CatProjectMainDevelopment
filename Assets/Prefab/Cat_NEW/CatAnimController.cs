@@ -35,7 +35,7 @@ public class CatAnimController : MonoBehaviour
     void Idle()
     {
         Cat.SetBool("idle", true);
-
+        Cat.SetBool("grounded", true);
     }
 
     //running blend is walking/running blend
@@ -44,74 +44,75 @@ public class CatAnimController : MonoBehaviour
 
     void Main()
     {
-
-        if (TPC.canclimb && sprinting)
+        if (TPC != null)
         {
-            sprintLock = true;
-        }
-        else
-            sprintLock = false;
-
-        //update animator with paramters that would be used by the old animator, makes life much more easier
-
-        Cat.SetBool("grounded", TPC.Grounded);
-
-        Cat.SetFloat("mainBlend", TPC._speed / 1);
-
-        Cat.SetBool("isClimbing", TPC.canclimb);
-
-
-        //sprinting
-        if (TPC._input.sprint)
-        {
-            sprinting = true;
-            if (!sprintLock)
+            if (TPC.canclimb && sprinting)
             {
-                Cat.speed = 3f;
-                t_running += 0.9f * Time.deltaTime;
+                sprintLock = true;
+            }
+            else
+                sprintLock = false;
+
+            //update animator with paramters that would be used by the old animator, makes life much more easier
+
+            Cat.SetBool("grounded", TPC.Grounded);
+
+            Cat.SetFloat("mainBlend", TPC._speed / 1);
+
+            Cat.SetBool("isClimbing", TPC.canclimb);
+
+
+            //sprinting
+            if (TPC._input.sprint)
+            {
+                sprinting = true;
+                if (!sprintLock)
+                {
+                    Cat.speed = 3f;
+                    t_running += 0.9f * Time.deltaTime;
+
+                    Cat.SetFloat("runningBlend", t_running);
+
+                    Cat.SetBool("idle", false);
+                    Cat.SetBool("climbIdle", false);
+                }
+            }
+            else
+            {
+                //dont blend past 0
+                if (Cat.GetFloat("runningBlend") > 0)
+                    t_running -= 2.2f * Time.deltaTime;
 
                 Cat.SetFloat("runningBlend", t_running);
 
-                Cat.SetBool("idle", false);
-                Cat.SetBool("climbIdle", false);
-            }
-        }
-        else
-        {
-            //dont blend past 0
-            if (Cat.GetFloat("runningBlend") > 0)
-                t_running -= 2.2f * Time.deltaTime;
-
-            Cat.SetFloat("runningBlend", t_running);
-
-            //only stop the animation if blending is completed
-            if (Cat.GetFloat("runningBlend") <= 0)
-            {
-                sprinting = false;
-                if (!sprintLock)
+                //only stop the animation if blending is completed
+                if (Cat.GetFloat("runningBlend") <= 0)
                 {
-                    Cat.speed = 1;
-                    Idle();
+                    sprinting = false;
+                    if (!sprintLock)
+                    {
+                        Cat.speed = 1;
+                        Idle();
+                    }
                 }
             }
+
+
+
+            //walking
+            if (TPC._input.move != Vector2.zero && !sprinting)
+            {
+                Cat.SetBool("climbIdle", false);
+
+                Cat.SetBool("idle", false);
+            }
+            else if (!sprinting)
+            {
+                if (!TPC.canclimb)
+                    Idle();
+                else
+                    ClimbIdle();
+            }
         }
-
-
-
-        //walking
-        if (TPC._input.move != Vector2.zero && !sprinting)
-        {
-            Cat.SetBool("climbIdle", false);
-
-            Cat.SetBool("idle", false);
-        }
-        else if (!sprinting)
-        {
-            if (!TPC.canclimb)
-                Idle();
-            else
-                ClimbIdle();
-        }
-
     }
 }
