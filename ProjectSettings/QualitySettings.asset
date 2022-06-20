@@ -57,7 +57,7 @@ QualitySettings:
     skinWeights: 2
     textureQuality: 2
     anisotropicTextures: 0
-    antiAliasing: 0
+    antiAliasing: 2
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 0
@@ -93,7 +93,7 @@ QualitySettings:
     skinWeights: 4
     textureQuality: 1
     anisotropicTextures: 1
-    antiAliasing: 0
+    antiAliasing: 4
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 1
@@ -134,10 +134,10 @@ QualitySettings:
     softVegetation: 0
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
-    vSyncCount: 1
+    vSyncCount: 2
     lodBias: 0.8
     maximumLODLevel: 1
-    streamingMipmapsActive: 1
+    streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
     streamingMipmapsRenderersPerFrame: 512
@@ -152,17 +152,5 @@ QualitySettings:
     excludedTargetPlatforms:
     - Server
   m_PerPlatformDefaultQuality:
-    Android: 0
-    Lumin: 0
-    Nintendo 3DS: 0
-    Nintendo Switch: 0
-    PS4: 0
-    PSP2: 0
     Server: 0
-    Stadia: 0
     Standalone: 0
-    WebGL: 0
-    Windows Store Apps: 0
-    XboxOne: 0
-    iPhone: 0
-    tvOS: 0

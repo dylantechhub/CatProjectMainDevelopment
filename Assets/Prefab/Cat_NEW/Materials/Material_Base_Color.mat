@@ -8,87 +8,61 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material_Base_Color
-  m_Shader: {fileID: 4800000, guid: 2cc37fdc3639643fbb9d4125d6693c01, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6021d2c94df225f4b95594cee8f9ba72, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: c8416b5ec6c3aa04cbf8a01b080c5f27, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
+    - _FurMap:
+        m_Texture: {fileID: 2800000, guid: 06a14a1f370dddc4d852be45219dc8fc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _FurTex:
-        m_Texture: {fileID: 2800000, guid: a3390bf69b5e44aefbaa8626b10f94cc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 415d0dc3a50405642ad0646359271f5b, type: 3}
-        m_Scale: {x: 210, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: e0a62416f4c506d4798f004b12d84fc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _FurDensity: 1.8
-    - _FurLength: 0.0003
-    - _FurShading: 0.171
-    - _FurThinness: 9.03
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _RimPower: 6
-    - _Shininess: 245
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
+    - _AlphaCutout: 0
+    - _Damper: 6.09
+    - _Density: 3
+    - _DrawOrigPolygon: 1
+    - _FaceNormalFactor: 0.13
+    - _FaceViewProdThresh: 1
+    - _FinJointNum: 3
+    - _FinLength: 0.01
+    - _FurJoint: 3
+    - _FurLength: 0.014
+    - _Gravity: -0.01
+    - _Metallic: 0.017
+    - _MoveScale: 3.49
+    - _NormalFactor: 0
+    - _NormalScale: 0.997
+    - _Occlusion: 0.305
+    - _RandomDirection: 0.767
+    - _RimLightIntensity: 0.908
+    - _RimLightPower: 20
+    - _ShadowExtraBias: -0.152
+    - _Smoothness: 0
+    - _Spring: 15.26
+    - _TessFactor: 1.68
+    - _TessMaxDist: 0.2
+    - _TessMinDist: 0.1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ForceGlobal: {r: 0, g: 0, b: 0, a: 0}
-    - _ForceLocal: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Specular: {r: 0, g: 0, b: 0, a: 1}
+    - _AmbientColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0.764151, g: 0.48041373, b: 0.13336597, a: 1}
+    - _BaseMove: {r: 0, g: -0.4, b: 0, a: 3}
+    - _WindFreq: {r: 1, g: 0.4, b: 0.2, a: 1}
+    - _WindMove: {r: 0.5, g: 0.3, b: 0.2, a: 2}
   m_BuildTextureStacks: []

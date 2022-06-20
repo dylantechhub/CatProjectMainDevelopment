@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Options;
+using UnityEngine.Rendering.Universal;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,7 +34,110 @@ public class UIManager : MonoBehaviour
     private bool Escenabled = false;
     private bool ControllerMenu = false;
 
-    
+    public bool LOADING_COMPLETE;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    public Image LoadingScreenFader;
+    public GameObject LoadingScreen;
+
+
+    IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(3);
+        float elapsedTime = 0.0f;
+        Color c = LoadingScreenFader.color;
+        while (elapsedTime < 2)
+        {
+            elapsedTime += Time.deltaTime;
+            c.a = 1.0f - Mathf.Clamp01(elapsedTime / 2);
+            LoadingScreenFader.color = c;
+            if (c.a < 0.2)
+            {
+                AudioMixer.SetFloat("MasterVol", OptionData.MSTRVOL);
+                LoadingScreenFader.raycastTarget = false;
+                LoadingScreenFader.maskable = false;
+                LoadingScreen.SetActive(false);
+            }
+            yield return null;
+        }
+    }
+
+    private UniversalAdditionalCameraData Cam;
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        Cam = Camera.main.GetUniversalAdditionalCameraData();
+        StarterAssets.StarterAssetsInputs.Menuopen = true;
+        //load saved options
+
+        StartCoroutine(FadeOut());
+        LOADING_COMPLETE = true;
+        LoadSavedSettings();
+    }
+
+    public GameObject DetailedWater;
+    public GameObject nonDetailedWater;
+
+    public TMP_Dropdown Quality;
+    public TMP_Dropdown Fullscreen;
+
+    public CloudsGen clouds;
+
+    void LoadSavedSettings()
+    {
+        //load saved volume settings data
+        CUISliders[0].value = OptionData.SFXVOL;
+        CUISliders[2].value = OptionData.MSTRVOL;
+        CUISliders[1].value = OptionData.MSICVOL;
+
+        //load saved quality settings data
+        if (OptionData.QUALITY_PRESET == 0)
+            Quality.value = 3;
+        else if (OptionData.QUALITY_PRESET == 1)
+            Quality.value = 2;
+        else if (OptionData.QUALITY_PRESET == 2)
+            Quality.value = 1;
+        else if (OptionData.QUALITY_PRESET == 3)
+            Quality.value = 0;
+
+
+        //load saved fullscreen settings data
+            //i decided to remove this. lol.
+
+        Screen.fullScreenMode = OptionData.FULLSCREEN_MODE;
+
+        //load advanced options
+        Cam.renderShadows = OptionData.SHADOWS;
+        Cam.renderPostProcessing = OptionData.POST_PROCESSING;
+        Cam.antialiasing = OptionData.ANTI_A_MODE;
+        Cam.antialiasingQuality = OptionData.ANTI_A_QUALITY;
+
+        if (OptionData.CLOUDS)
+            clouds.enabled = true;
+        else
+            clouds.enabled = false;
+
+
+        if (OptionData.DETAILED_WATER)
+        {
+            DetailedWater.SetActive(true);
+            nonDetailedWater.SetActive(false);
+        }
+        else
+        {
+            DetailedWater.SetActive(false);
+            nonDetailedWater.SetActive(true);
+        }
+    }
+
     private void Update()
     {
         if (ControllerMenu)
@@ -41,11 +145,14 @@ public class UIManager : MonoBehaviour
         else if (!ControllerMenu)
             Devices.text = $"Current Controls:\n Keyboard&Mouse";
 
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && !StarterAssets.StarterAssetsInputs.Menuopen)
         {
             UImenu.SetActive(true);
             StarterAssets.StarterAssetsInputs.Menuopen = true;
             Escenabled = true;
+        } else if (Keyboard.current.escapeKey.wasPressedThisFrame && StarterAssets.StarterAssetsInputs.Menuopen)
+        {
+            Continue();
         }
 
         //controller menu open
@@ -96,15 +203,32 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        CUISliders[0].value = OptionData.SFXVOL;
-        CUISliders[2].value = OptionData.MSTRVOL;
-        CUISliders[1].value = OptionData.MSICVOL;
-    }
-
     private void FixedUpdate()
     {
+
+            //set saved screen settings
+            OptionData.FULLSCREEN_MODE = Screen.fullScreenMode;
+
+            //set saved quality settings
+            OptionData.QUALITY_PRESET = QualitySettings.GetQualityLevel();
+
+            //set saved Anti-Aliasing settings
+            OptionData.ANTI_A_MODE = Cam.antialiasing;
+            OptionData.ANTI_A_QUALITY = Cam.antialiasingQuality;
+
+            //set saved Post-Processing settings
+            OptionData.POST_PROCESSING = Cam.renderPostProcessing;
+
+            //set saved Clouds settings
+            OptionData.CLOUDS = clouds.enabled;
+
+            //set saved Shadows settings
+            OptionData.SHADOWS = Cam.renderShadows;
+
+            //set saved Detailed Water settings
+            OptionData.DETAILED_WATER = DetailedWater.activeSelf;
+        
+        OptionData.CurrentSavedScene = SceneManager.GetActiveScene().name;
         OptionData.SFXVOL = CUISliders[0].value;
         OptionData.MSTRVOL = CUISliders[2].value;
         OptionData.MSICVOL = CUISliders[1].value;
@@ -127,14 +251,30 @@ public class UIManager : MonoBehaviour
 
     public void ChangeQualityPreset(TMP_Dropdown dd)
     {
+        //very low
         if (dd.value == 3)
+        {
             QualitySettings.SetQualityLevel(0, true);
+            Cam.antialiasing = AntialiasingMode.None;
+        }
+        //low
         if (dd.value == 2)
+        {
             QualitySettings.SetQualityLevel(1, true);
+            Cam.antialiasingQuality = AntialiasingQuality.Low;
+        }
+        //medium
         if (dd.value == 1)
+        {
+            Cam.antialiasingQuality = AntialiasingQuality.Medium;
             QualitySettings.SetQualityLevel(2, true);
+        }
+        //ultra
         if (dd.value == 0)
+        {
+            Cam.antialiasingQuality = AntialiasingQuality.High;
             QualitySettings.SetQualityLevel(3, true);
+        }
     }
 
     public void ChangeFullscreenMode(TMP_Dropdown dd)
@@ -195,7 +335,11 @@ public class UIManager : MonoBehaviour
             AudioMixer.SetFloat("MasterVol", slider.value);
         }
     }
-
+    public ToScene TS;
+    public void ToMainMenu()
+    {
+        TS.Auto();
+    }
 
     public void Continue()
     {
