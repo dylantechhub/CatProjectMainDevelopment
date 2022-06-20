@@ -18713,7 +18713,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 13.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8101808399854149347, guid: fd95675140a9b8046bd86bb3c8996217, type: 3}
+      propertyPath: shadowReceive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101808399854149347, guid: fd95675140a9b8046bd86bb3c8996217, type: 3}
+      propertyPath: useLightProbes
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 399024738681950517, guid: fd95675140a9b8046bd86bb3c8996217, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd95675140a9b8046bd86bb3c8996217, type: 3}
 --- !u!1001 &987019863
 PrefabInstance:

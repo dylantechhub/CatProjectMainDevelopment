@@ -30,7 +30,7 @@ public class ToScene : MonoBehaviour
 
     public IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         if (LEVEL_2)
         {
             SceneManager.LoadScene("Level 2 Scene");
