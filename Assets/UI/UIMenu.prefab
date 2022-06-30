@@ -6653,6 +6653,10 @@ PrefabInstance:
       value: LOADER
       objectReference: {fileID: 0}
     - target: {fileID: 1054823423725312332, guid: 24e9498c4669de1478ba2e5ef06d2bb6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f328986b5b51db4c9dd5900770f9e23, type: 3}
+    - target: {fileID: 1054823423725312332, guid: 24e9498c4669de1478ba2e5ef06d2bb6, type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}

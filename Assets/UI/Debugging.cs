@@ -18,6 +18,7 @@ public class Debugging : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Gamepad.current != null)
         if (Gamepad.current.name == "DualShock4GamepadHID" || Gamepad.current.name == "DualShock4GamepadHID2" || Gamepad.current.name == "DualShock4GamepadHID3")
         {
             InputSystem.RemoveDevice(Gamepad.current);

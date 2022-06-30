@@ -75,12 +75,21 @@ public class UIManager : MonoBehaviour
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         Cam = Camera.main.GetUniversalAdditionalCameraData();
-        StarterAssets.StarterAssetsInputs.Menuopen = true;
         //load saved options
 
         StartCoroutine(FadeOut());
         LOADING_COMPLETE = true;
+
+        StarterAssets.StarterAssetsInputs.Menuopen = false;
         LoadSavedSettings();
+
+        UImenu.SetActive(true);
+        StarterAssets.StarterAssetsInputs.Menuopen = true;
+        Escenabled = true;
+
+
+        UImenu.SetActive(false);
+        StarterAssets.StarterAssetsInputs.Menuopen = false;
     }
 
     public GameObject DetailedWater;
