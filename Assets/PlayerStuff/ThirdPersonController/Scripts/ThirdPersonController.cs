@@ -72,15 +72,19 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         // cinemachine
-        private float _cinemachineTargetYaw;
-        private float _cinemachineTargetPitch;
+        [HideInInspector]
+        public float _cinemachineTargetYaw;
+        [HideInInspector]
+        public float _cinemachineTargetPitch;
 
         // player
         [HideInInspector]
         public float _speed;
         private float _animationBlend;
-        private float _targetRotation = 0.0f;
-        private float _rotationVelocity;
+        [HideInInspector]
+        public float _targetRotation = 0.0f;
+        [HideInInspector]
+        public float _rotationVelocity;
         public float _verticalVelocity;
 
         private float _terminalVelocity = 53.0f;
@@ -103,10 +107,12 @@ namespace StarterAssets
 
         [HideInInspector]
         public Animator _animator;
-        private CharacterController _controller;
+        [HideInInspector]
+        public CharacterController _controller;
         //[HideInInspector]
         public StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        [HideInInspector]
+        public GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
 
@@ -178,8 +184,8 @@ namespace StarterAssets
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
-                _cinemachineTargetPitch += _input.look.y * Time.deltaTime;
+               // _cinemachineTargetYaw += _input.look.x * Time.deltaTime;
+               //_cinemachineTargetPitch += _input.look.y * Time.deltaTime;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -207,6 +213,13 @@ namespace StarterAssets
                 Debug.DrawRay(transform.position + Raycastpoint, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
             }
         }
+
+        [HideInInspector]
+        public Vector3 targetDirection;
+        public Vector3 inputDirection;
+
+        public bool sprinting;
+        public bool moving;
 
         private void Move()
         {
@@ -255,10 +268,12 @@ namespace StarterAssets
             {
                 _speed = targetSpeed;
             }
+
+
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 
             // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
@@ -272,7 +287,7 @@ namespace StarterAssets
             }
 
 
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
             if (!canclimb)
@@ -326,6 +341,8 @@ namespace StarterAssets
             }
         }
 
+        public bool jump;
+
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -348,7 +365,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump)
+                if (_input.jump || jump)
                 {
                     if (_jumpTimeoutDelta <= 0.0f)
                     {
@@ -390,7 +407,10 @@ namespace StarterAssets
 
                 // if we are not grounded, do not jump
                 if (!canclimb)
-                _input.jump = false;
+                {
+                    _input.jump = false;
+                    jump = false;
+                }
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)

@@ -405,7 +405,11 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _cinemachineTargetYaw: 0
+  _cinemachineTargetPitch: 0
   _speed: 0
+  _targetRotation: 0
+  _rotationVelocity: 0
   _verticalVelocity: 0
   _animIDSpeed: 0
   _animIDGrounded: 0
@@ -413,8 +417,15 @@ MonoBehaviour:
   _animIDFreeFall: 0
   _animIDMotionSpeed: 0
   _animator: {fileID: 0}
+  _controller: {fileID: 0}
   _input: {fileID: 0}
+  _mainCamera: {fileID: 0}
   StopClimbing: 0
+  targetDirection: {x: 0, y: 0, z: 0}
+  inputDirection: {x: 0, y: 0, z: 0}
+  sprinting: 0
+  moving: 0
+  jump: 0
 --- !u!114 &1535945855
 MonoBehaviour:
   m_ObjectHideFlags: 0
