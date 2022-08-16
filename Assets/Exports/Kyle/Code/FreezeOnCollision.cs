@@ -10,7 +10,7 @@ public class FreezeOnCollision : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && !isTriggerd)
         {
-            m_Rigidbody.freezeRotation = false;
+            m_Rigidbody.isKinematic = false;
             isTriggerd = true;
             Debug.Log("Trigger");
         }
