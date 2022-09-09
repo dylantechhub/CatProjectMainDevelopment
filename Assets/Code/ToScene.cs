@@ -33,15 +33,15 @@ public class ToScene : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         if (LEVEL_2)
         {
-            SceneManager.LoadScene("Level 2 Scene");
+            SceneManager.LoadScene("Level Two");
         }
         if (LEVEL_3)
         {
-            SceneManager.LoadScene("Level 3 Scene");
+            SceneManager.LoadScene("Level Three");
         }
         if (MENU)
         {
-            SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("Main Menu V2");
         }
     }
 
